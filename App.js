@@ -2,7 +2,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
 
-import SettingsPage from './components/SettingsPage'
+import SettingsPage from './pages/SettingsPage'
 
 
 import {TimeSettings, useRestTime} from './contexts/timeSettings'

@@ -1,5 +1,4 @@
-import React, {useEffect} from 'react'
-import AsyncStorage from '@react-native-community/async-storage'
+import React from 'react'
 import Slider from '@react-native-community/slider';
 import { View, Text, StyleSheet } from 'react-native';
 
@@ -7,7 +6,7 @@ import {useWorkTime, useRestTime} from '../contexts/timeSettings';
 
 import {showTimeInMinutesAndSecondsString} from '../timeDisplayFunctions';
 
-function WorkTimeSlider(){
+export function WorkTimeSlider(){
     const [workTime, setWorkTime] = useWorkTime();
 
     return (
@@ -33,7 +32,7 @@ function WorkTimeSlider(){
     );
 }
 
-function RestTimeSlider(){
+export function RestTimeSlider(){
     const [restTime, setRestTime] = useRestTime();
 
     return (
@@ -57,17 +56,6 @@ function RestTimeSlider(){
           />
         </View>
       );
-}
-
-export default function SettingsPage() {
-    
-
-    return (
-        <View style= {{width:"100%"}}>
-            <WorkTimeSlider />
-            <RestTimeSlider />
-        </View>
-    )
 }
 
 const styles = StyleSheet.create({
