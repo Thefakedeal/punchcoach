@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Slider from '@react-native-community/slider';
 import { View, Text, StyleSheet } from 'react-native';
 
@@ -9,11 +9,25 @@ import {showTimeInMinutesAndSecondsString} from '../timeDisplayFunctions';
 export function WorkTimeSlider(){
     const [workTime, setWorkTime] = useWorkTime();
 
+    const [currentValue, setCurrentValue] = useState(workTime);
+
+    useEffect(()=>{
+      setCurrentValue(workTime)
+    },[workTime])
+
+    const handleValueChange = (value) =>{
+      setCurrentValue(value)
+    }
+
+    const handleSlidingComplete = (value) =>{
+      setWorkTime(value)
+    }
+
     return (
       <View style={styles.sliderComponent}>
         <View style= {styles.sliderTextComponent}>
           <Text style={styles.sliderText}> Round Time </Text>  
-          <Text style={styles.sliderText}> {showTimeInMinutesAndSecondsString(workTime)} </Text>
+          <Text style={styles.sliderText}> {showTimeInMinutesAndSecondsString(currentValue)} </Text>
         </View>
         <Slider
           style={styles.slider}
@@ -21,9 +35,8 @@ export function WorkTimeSlider(){
           maximumValue={900}
           step={30}
           value={workTime}
-          onValueChange={(value) => {
-            setWorkTime(value);
-          }}
+          onValueChange={handleValueChange}
+          onSlidingComplete= {handleSlidingComplete}
           maximumTrackTintColor="#C4C4C4"
           thumbTintColor="#C4C4C4"
           minimumTrackTintColor="#04C3FF"
@@ -35,11 +48,25 @@ export function WorkTimeSlider(){
 export function RestTimeSlider(){
     const [restTime, setRestTime] = useRestTime();
 
+    const [currentValue, setCurrentValue] = useState(restTime);
+
+    useEffect(()=>{
+      setCurrentValue(restTime)
+    },[restTime])
+
+    const handleValueChange = (value) =>{
+      setCurrentValue(value)
+    }
+
+    const handleSlidingComplete = (value) =>{
+      setRestTime(value)
+    }
+
     return (
         <View style={styles.sliderComponent}>
           <View style= {styles.sliderTextComponent}>
             <Text style={styles.sliderText}> Rest Time </Text>  
-            <Text style={styles.sliderText}> {showTimeInMinutesAndSecondsString(restTime)} </Text>
+            <Text style={styles.sliderText}> {showTimeInMinutesAndSecondsString(currentValue)} </Text>
           </View>
           <Slider
             style={styles.slider}
@@ -47,9 +74,8 @@ export function RestTimeSlider(){
             maximumValue={900}
             step={30}
             value={restTime}
-            onValueChange={(value) => {
-              setRestTime(value);
-            }}
+            onValueChange={handleValueChange}
+            onSlidingComplete= {handleSlidingComplete}
             maximumTrackTintColor="#C4C4C4"
             thumbTintColor="#C4C4C4"
             minimumTrackTintColor="#04C3FF"
