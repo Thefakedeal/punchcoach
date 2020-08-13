@@ -2,6 +2,22 @@ import React, { useState } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import { RadioButton } from "react-native-paper";
 
+function RadioComponent({name,checked,handleOnPress}){
+  return(
+    <View style={styles.radioView}>
+            <RadioButton
+              value={name}
+              color={"#04C3FF"}
+              uncheckedColor={"#C4C4C4"}
+              status={checked===true?'checked':'unchecked'}
+              onPress={handleOnPress}
+            />
+
+            <Text style={styles.radioText}>{name}</Text>
+          </View>
+  )
+}
+
 export function CombosLevel() {
   const [checked, setChecked] = useState("Easy");
 
@@ -30,19 +46,15 @@ export function CombosLevel() {
       <FlatList
         data={LEVELS}
         renderItem={({ item }) => (
-          <View key={item.key} style={styles.radioView}>
-            <RadioButton
-              value={item.name}
-              color={"#04C3FF"}
-              uncheckedColor={"#C4C4C4"}
-              status={checked === item.name ? "checked" : "unchecked"}
-              onPress={() => {
-                setChecked(item.name);
-              }}
-            />
-
-            <Text style={styles.radioText}>{item.name}</Text>
-          </View>
+         <RadioComponent key={item.key} 
+         name={item.name}
+         handleOnPress= {
+           ()=>{
+             setChecked(item.name)
+           }
+         }
+         checked={checked===item.name?true:false}
+         />
         )}
       />
     </View>
