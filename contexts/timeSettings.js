@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 import AsyncStorage from '@react-native-community/async-storage'
 
-const DEFAULTVALUES = {
+export const DEFAULTVALUES = {
     ROUNDS: 3,
     RESTTIME:30,
-    WORKTIME: 180
+    WORKTIME: 180,
+    MAXRESTTIME: 900,
+    MAXWORKTIME: 900
 }
 
 const KEYS = {

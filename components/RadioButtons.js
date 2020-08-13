@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import { RadioButton } from "react-native-paper";
 
+
+import {useComboLevel,combosLevels} from '../contexts/difficuiltySettings'
 function RadioComponent({name,checked,handleOnPress}){
   return(
     <View style={styles.radioView}>
@@ -12,48 +14,28 @@ function RadioComponent({name,checked,handleOnPress}){
               status={checked===true?'checked':'unchecked'}
               onPress={handleOnPress}
             />
-
             <Text style={styles.radioText}>{name}</Text>
           </View>
   )
 }
 
 export function CombosLevel() {
-  const [checked, setChecked] = useState("Easy");
-
-  const LEVELS = [
-    {
-      key: "1",
-      name: "Easy",
-    },
-    {
-      key: "2",
-      name: "Medium",
-    },
-    {
-      key: "3",
-      name: "Hard",
-    },
-    {
-      key: "4",
-      name: "Expert",
-    },
-  ];
+  const [comboLevel, setComboLevel]= useComboLevel();
 
   return (
     <View>
       <Text style={styles.text}>Combos Level </Text>
       <FlatList
-        data={LEVELS}
+        data={combosLevels}
         renderItem={({ item }) => (
-         <RadioComponent key={item.key} 
+         <RadioComponent key={item.id} 
          name={item.name}
          handleOnPress= {
            ()=>{
-             setChecked(item.name)
+             setComboLevel(item.name)
            }
          }
-         checked={checked===item.name?true:false}
+         checked={comboLevel===item.name?true:false}
          />
         )}
       />

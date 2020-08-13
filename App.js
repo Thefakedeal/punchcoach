@@ -5,16 +5,18 @@ import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import SettingsPage from './pages/SettingsPage'
 
 
-import {TimeSettings, useRestTime} from './contexts/timeSettings'
+import {TimeSettings} from './contexts/timeSettings'
+import {DifficuiltySettings} from './contexts/difficuiltySettings'
+
 export default function App() {
   return (
-    <TimeSettings>
-
-    <View style={styles.container}>
-    <SettingsPage />
-    </View>
-
-    </TimeSettings>
+    <DifficuiltySettings>
+      <TimeSettings>
+        <View style={styles.container}>
+          <SettingsPage />
+        </View>
+      </TimeSettings>
+    </DifficuiltySettings>
   );
 }
 

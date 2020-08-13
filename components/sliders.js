@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Slider from '@react-native-community/slider';
 import { View, Text, StyleSheet } from 'react-native';
 
-import {useWorkTime, useRestTime} from '../contexts/timeSettings';
+import {useWorkTime, useRestTime, DEFAULTVALUES} from '../contexts/timeSettings';
 
 import {showTimeInMinutesAndSecondsString} from '../timeDisplayFunctions';
 
@@ -32,7 +32,7 @@ export function WorkTimeSlider(){
         <Slider
           style={styles.slider}
           minimumValue={0}
-          maximumValue={900}
+          maximumValue={DEFAULTVALUES.MAXWORKTIME}
           step={30}
           value={workTime}
           onValueChange={handleValueChange}
@@ -71,7 +71,7 @@ export function RestTimeSlider(){
           <Slider
             style={styles.slider}
             minimumValue={0}
-            maximumValue={900}
+            maximumValue={DEFAULTVALUES.MAXRESTTIME}
             step={30}
             value={restTime}
             onValueChange={handleValueChange}
