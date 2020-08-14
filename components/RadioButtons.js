@@ -3,7 +3,8 @@ import { View, Text, FlatList, StyleSheet } from "react-native";
 import { RadioButton } from "react-native-paper";
 
 
-import {useComboLevel,combosLevels} from '../contexts/difficuiltySettings'
+import {useComboLevel,combosLevels, useSpeed, speedLevels} from '../contexts/difficuiltySettings'
+
 function RadioComponent({name,checked,handleOnPress}){
   return(
     <View style={styles.radioView}>
@@ -41,6 +42,32 @@ export function CombosLevel() {
       />
     </View>
   );
+}
+
+export function SpeedSettings(){
+  const [speed, setSpeed] = useSpeed();
+
+  return(
+    <View>
+      <Text style={styles.text}>Speed Levels</Text>
+      <FlatList
+        data={speedLevels}
+        renderItem={ ({item})=>(
+          <RadioComponent key= {item.id}
+          name= {item.name}
+          handleOnPress= {
+            ()=>{
+              setSpeed(item.name)
+            }
+          }
+          checked= {speed===item.name?true:false}
+          />
+        )
+        }
+        />
+    </View>
+  )
+
 }
 
 const styles = StyleSheet.create({

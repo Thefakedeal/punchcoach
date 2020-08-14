@@ -2,7 +2,7 @@ import React from 'react'
 import { View} from 'react-native';
 
 import {WorkTimeSlider, RestTimeSlider} from '../components/sliders'
-import {CombosLevel} from '../components/RadioButtons'
+import {CombosLevel, SpeedSettings} from '../components/RadioButtons'
 
 
 export default function SettingsPage() {
@@ -11,6 +11,7 @@ export default function SettingsPage() {
             <WorkTimeSlider />
             <RestTimeSlider />
             <CombosLevel />
+            <SpeedSettings/>
         </View>
     )
 }
