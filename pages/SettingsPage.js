@@ -7,7 +7,7 @@ import {CombosLevel, SpeedSettings} from '../components/RadioButtons'
 
 export default function SettingsPage() {
     return (
-        <View style= {{flex:1, width:"100%"}}>
+        <View style= {{flex:1, width:"100%", backgroundColor: '#090909'}}>
             <WorkTimeSlider />
             <RestTimeSlider />
             <CombosLevel />
