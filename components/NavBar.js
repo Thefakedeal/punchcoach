@@ -14,12 +14,25 @@ function SettingsNav({onPress}){
     )
 }
 
+
+function InfoNav({onPress}){
+    return (
+        <TouchableWithoutFeedback onPress={onPress} style={styles.navButton}>
+            <Image style={styles.icon}
+            source= {require('../assets/info.png')}
+            />
+        </TouchableWithoutFeedback>
+    )
+}
+
+
 export default function NavBar({navigation}) {
     const handleSettingsOnPress = ()=>{
         navigation.navigate(NAVROUTES.SETTINGS)
     }
     return (
         <View style={styles.nav}>
+            <InfoNav onPress = {handleSettingsOnPress} />
             <SettingsNav onPress= {handleSettingsOnPress} />
         </View>
     )
@@ -32,10 +45,11 @@ const styles = StyleSheet.create({
         display: "flex",
         height: 50,
         width: "100%",
-        paddingTop: 5,
-        paddingBottom: 5,
+        padding: 10,
+        // paddingBottom: 5,
         flexDirection: "row",
-        alignItems: "flex-start"
+        alignItems: "flex-start",
+        justifyContent: "space-between"
     },
     navButton:{
         flex: 1,

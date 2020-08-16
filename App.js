@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 
 
@@ -9,6 +9,10 @@ import StackNavigation from "./StackNavigation";
 
 
 export default function App() {
+  useEffect(()=>{
+    StatusBar.setBackgroundColor('#000');
+    StatusBar.setBarStyle('light-content')
+  },[])
   return (
     <DifficuiltySettings>
       <TimeSettings>
