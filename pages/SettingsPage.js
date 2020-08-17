@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-import {WorkTimeSlider, RestTimeSlider} from '../components/sliders'
+import {WorkTimeSlider, RestTimeSlider,RoundsSlider} from '../components/sliders'
 import {CombosLevel, SpeedSettings} from '../components/RadioButtons'
 
 import FullScreen from '../components/FullScreen'
@@ -11,6 +11,7 @@ export default function SettingsPage() {
         <FullScreen>
             <WorkTimeSlider />
             <RestTimeSlider />
+            <RoundsSlider />
             <CombosLevel />
             <SpeedSettings/>
         </FullScreen>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Slider from '@react-native-community/slider';
 import { View, Text, StyleSheet } from 'react-native';
 
-import {useWorkTime, useRestTime, DEFAULTVALUES} from '../contexts/timeSettings';
+import {useWorkTime, useRestTime, useRounds ,DEFAULTVALUES} from '../contexts/timeSettings';
 
 import {showTimeInMinutesAndSecondsString} from '../timeDisplayFunctions';
 
@@ -43,6 +43,45 @@ export function WorkTimeSlider(){
         />
       </View>
     );
+}
+
+export function RoundsSlider(){
+  const [rounds, setRounds] = useRounds();
+
+  const [currentValue, setCurrentValue] = useState(rounds);
+
+  useEffect(()=>{
+    setCurrentValue(rounds)
+  },[rounds])
+
+  const handleValueChange = (value) =>{
+    setCurrentValue(value)
+  }
+
+  const handleSlidingComplete = (value) =>{
+    setRounds(value)
+  }
+
+  return (
+    <View style={styles.sliderComponent}>
+      <View style= {styles.sliderTextComponent}>
+        <Text style={styles.sliderText}> Rounds</Text>  
+        <Text style={styles.sliderText}> {currentValue} </Text>
+      </View>
+      <Slider
+        style={styles.slider}
+        minimumValue={1}
+        maximumValue={DEFAULTVALUES.MAXROUNDS}
+        step={1}
+        value={rounds}
+        onValueChange={handleValueChange}
+        onSlidingComplete= {handleSlidingComplete}
+        maximumTrackTintColor="#C4C4C4"
+        thumbTintColor="#C4C4C4"
+        minimumTrackTintColor="#04C3FF"
+      />
+    </View>
+  );
 }
 
 export function RestTimeSlider(){

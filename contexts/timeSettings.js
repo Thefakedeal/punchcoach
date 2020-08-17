@@ -6,7 +6,8 @@ export const DEFAULTVALUES = {
     RESTTIME:30,
     WORKTIME: 180,
     MAXRESTTIME: 900,
-    MAXWORKTIME: 900
+    MAXWORKTIME: 1800,
+    MAXROUNDS: 99
 }
 
 const KEYS = {
@@ -18,6 +19,7 @@ const KEYS = {
 const roundsContext = React.createContext();
 const restTimeContext = React.createContext();
 const workTimeContext = React.createContext();
+
 
 export function useRounds(){
     const [rounds, setRounds] = useContext(roundsContext);
@@ -34,8 +36,7 @@ export function useRestTime(){
 }
 
 export function useWorkTime(){
-    const [workTime, setWorkTime] = useContext(workTimeContext)
-    
+    const [workTime, setWorkTime] = useContext(workTimeContext) 
 
     return [workTime, setWorkTime]
 }
@@ -50,7 +51,6 @@ export function TimeSettings({children}) {
             if(result) setRounds(parseInt(result));
         })
         AsyncStorage.getItem(KEYS.WORKTIME, (err, result)=>{
-            // console.log(result)
             if(result) setWorkTime(parseInt(result));
         })
         AsyncStorage.getItem(KEYS.RESTTIME, (err, result)=>{
