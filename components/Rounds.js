@@ -3,11 +3,27 @@ import { View, Text, StyleSheet, Button } from "react-native";
 
 import CustomButton from "./CustomButton";
 
-import { useCurrentRounds, useRoundsFunctions } from "../contexts/timerValues";
+import {DEFAULTVALUES} from '../contexts/timeSettings'
+import { useCurrentRounds} from "../contexts/timerValues";
 
 export default function Rounds() {
   const [currentRounds, setCurrentRounds] = useCurrentRounds();
-  const { incrementRounds, decrementRounds } = useRoundsFunctions();
+
+  const incrementRounds = () =>{
+    setCurrentRounds(rounds=>rounds<DEFAULTVALUES.MAXROUNDS?rounds+1:rounds);
+  }
+
+  const decrementRounds = () =>{
+    setCurrentRounds(rounds=>rounds>1?rounds-1:rounds);
+  }
+
+  function RoundsView() {
+    return (
+      <View style={styles.view}>
+        <Text style={styles.text}> {currentRounds} </Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -17,7 +33,7 @@ export default function Rounds() {
         textStyle={styles.buttonText}
         onPress={decrementRounds}
       />
-      <RoundsView rounds={currentRounds} />
+      <RoundsView/>
       <CustomButton
         title={"+"}
         buttonStyle={styles.buttonStyle}
@@ -28,13 +44,7 @@ export default function Rounds() {
   );
 }
 
-function RoundsView({ rounds }) {
-  return (
-    <View style={styles.view}>
-      <Text style={styles.text}> {rounds} </Text>
-    </View>
-  );
-}
+
 
 const styles = StyleSheet.create({
   container: {
