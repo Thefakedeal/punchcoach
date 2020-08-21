@@ -10,6 +10,7 @@ import {
 const currentTimeContext = React.createContext();
 const currentRoundsContext = React.createContext();
 const currentWorkStateContext = React.createContext();
+const timerIsOnContext= React.createContext();
 
 export const WORKSTATE = {
   WORK: true,
@@ -31,12 +32,13 @@ export function useCurrentWorkState() {
   const [currentWorkState, setCurrentWorkState] = useContext(
     currentWorkStateContext
   );
-  const toggleWorkState = () => {
-    setCurrentWorkState((currentState) =>
-      currentState === WORKSTATE.WORK ? WORKSTATE.REST : WORKSTATE.WORK
-    );
-  };
-  return [currentWorkState, toggleWorkState];
+
+  return [currentWorkState, setCurrentWorkState];
+}
+
+export function useTimerIsOn(){
+  const [timerIsOn, setTimerIsOn] = useContext(timerIsOnContext);
+  return [timerIsOn,setTimerIsOn];
 }
 
 export function TimerValues({ children }) {
@@ -47,6 +49,7 @@ export function TimerValues({ children }) {
   const [currentTime, setCurrentTime] = useState(workTime);
   const [currentRound, setCurrentRound] = useState(rounds);
   const [currentWorkState, setCurrentWorkState] = useState(WORKSTATE.WORK);
+  const [timerIsOn, setTimerIsOn] = useState(false);
 
   useEffect(() => {
     setCurrentTime(workTime);
@@ -62,6 +65,7 @@ export function TimerValues({ children }) {
   }, [rounds]);
 
   return (
+    <timerIsOnContext.Provider value= {[timerIsOn, setTimerIsOn]} >
     <currentTimeContext.Provider value={[currentTime, setCurrentTime]}>
       <currentRoundsContext.Provider value={[currentRound, setCurrentRound]}>
         <currentWorkStateContext.Provider
@@ -71,5 +75,6 @@ export function TimerValues({ children }) {
         </currentWorkStateContext.Provider>
       </currentRoundsContext.Provider>
     </currentTimeContext.Provider>
+    </timerIsOnContext.Provider>
   );
 }

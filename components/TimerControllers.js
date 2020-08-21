@@ -1,34 +1,32 @@
 import React, { useState, useEffect } from "react";
 
+
 import {
   useCurrentTime,
   useCurrentWorkState,
   useCurrentRounds,
-  WORKSTATE,
+  useTimerIsOn,
 } from "../contexts/timerValues";
 
-import {
-    useWorkTime,
-    useRounds,
-  } from "../contexts/timeSettings";
+import { useWorkTime, useRounds } from "../contexts/timeSettings";
 
 import CustomButton from "./CustomButton";
 import { View, StyleSheet } from "react-native";
 
-export default function TimerControllers() {
-  const [timerInterval, setTimerInterval] = useState();
-  const [timerIsOn, setTimerIsOn] = useState(false);
-  const [currentRounds, setCurrentRounds] = useCurrentRounds();
-  const [time, setTime] = useCurrentTime();
-  const [workState, toggleWorkState] = useCurrentWorkState();
 
+export default function TimerControllers() {
+  const [time, setTime] = useCurrentTime();
+  const [timerInterval, setTimerInterval] = useState();
+  const [timerIsOn, setTimerIsOn] = useTimerIsOn();
+  const [workState, setWorkState] = useCurrentWorkState();
+  const [currentRounds, setCurrentRounds] = useCurrentRounds();
   const [workTime] = useWorkTime();
-  const [round] = useRounds()
+  const [round] = useRounds();
 
 
   useEffect(() => {
     if (time <= 0 && currentRounds > 0) {
-      toggleWorkState();
+      setWorkState(work=>!work)
     }
   }, [time]);
 
@@ -37,7 +35,7 @@ export default function TimerControllers() {
   }, [currentRounds]);
 
   useEffect(() => {
-    if (workState == WORKSTATE.WORK && timerIsOn) roundComplete();
+    if (workState && timerIsOn) roundComplete();
   }, [workState]);
 
   function decrementTimer() {
@@ -58,16 +56,17 @@ export default function TimerControllers() {
     setTimerIsOn(false);
   }
 
-  function resetRounds(){
-      setCurrentRounds(round);
+  function resetRounds() {
+    setCurrentRounds(round);
   }
-  function resetClock(){
-      setTime(workTime)
+  function resetClock() {
+    setTime(workTime);
   }
 
   function resetTimer() {
     stopTimer();
     resetClock();
+    setWorkState(true);
     resetRounds();
   }
 
@@ -79,7 +78,7 @@ export default function TimerControllers() {
         onPress={timerIsOn ? stopTimer : startTimer}
       />
 
-<CustomButton
+      <CustomButton
         title={"Reset"}
         buttonStyle={styles.buttonStyle}
         onPress={resetTimer}

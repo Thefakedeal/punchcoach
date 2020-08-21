@@ -7,6 +7,8 @@ import NavBar from "../components/NavBar";
 import Clock from "../components/Clock";
 import Rounds from "../components/Rounds";
 import TimerControllers from "../components/TimerControllers";
+import PlayBell from "../components/PlayBell"
+import PlayCombos from '../components/PlayCombos'
 import { View, StyleSheet } from "react-native";
 
 export default function HomePage({ navigation }) {
@@ -17,6 +19,8 @@ export default function HomePage({ navigation }) {
         <TimerValues>
           <Rounds />
           <Clock />
+          <PlayCombos />
+          <PlayBell />
           <TimerControllers />
         </TimerValues>
       </View>
