@@ -25,7 +25,9 @@ function loadCombo(asset){
   })
 }
 
-async function useCombo() {
+async function useCombo(maxFrequency) {
+
+  let frequency = Math.floor(Math.random()*maxFrequency);
 
   const playRandomAudio = async () =>{
     const audio = new Audio.Sound();
@@ -36,10 +38,14 @@ async function useCombo() {
     catch(err){
       console.log(err)
     }
-    // await audio.unloadAsync()
+    if(frequency>=0){
+      frequency--;
+      setTimeout(playRandomAudio, 500);
+    }
   }
 
-  playRandomAudio();
+  
+  await playRandomAudio();
 
 }
 
@@ -50,7 +56,7 @@ export default function PlayBell() {
   useEffect(() => {
     try {
       if (timerIsOn && time%2==0){
-        useCombo()
+        useCombo(3)
       }
     } catch (err) {
       console.log(err);
