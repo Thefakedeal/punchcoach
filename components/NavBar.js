@@ -30,9 +30,13 @@ export default function NavBar({navigation}) {
     const handleSettingsOnPress = ()=>{
         navigation.navigate(NAVROUTES.SETTINGS)
     }
+
+    const handleInfoOnPress = ()=>{
+        navigation.navigate(NAVROUTES.INFO)
+    }
     return (
         <View style={styles.nav}>
-            <InfoNav onPress = {handleSettingsOnPress} />
+            <InfoNav onPress = {handleInfoOnPress} />
             <SettingsNav onPress= {handleSettingsOnPress} />
         </View>
     )

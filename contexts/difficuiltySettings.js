@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 
-const DIFFICUILTY = {
+export const DIFFICUILTY = {
   EASY: "Easy",
   MEDIUM: "Medium",
   HARD: "Hard",
   EXPERT: "Expert",
 };
 
-const SPEED = {
+export const SPEED = {
   TURTLE: "Turtle",
   SLOW: "Slow",
   NORMAL: "Normal",
   FAST: "Fast",
 };
+
 const KEYS = {
   COMBOLEVEL: "comboLevel",
   SPEED: "speed",
@@ -28,18 +29,22 @@ export const combosLevels = [
   {
     id: "1",
     name: DIFFICUILTY.EASY,
+    numOfCombos: 2
   },
   {
     id: "2",
     name: DIFFICUILTY.MEDIUM,
+    numOfCombos: 3
   },
   {
     id: "3",
     name: DIFFICUILTY.HARD,
+    numOfCombos: 4
   },
   {
     id: "4",
     name: DIFFICUILTY.EXPERT,
+    numOfCombos: 6
   },
 ];
 
@@ -47,18 +52,22 @@ export const speedLevels = [
   {
     id: "1",
     name: SPEED.TURTLE,
+    duration: 4,
   },
   {
     id: "2",
     name: SPEED.SLOW,
+    duration: 3.5,
   },
   {
     id: "3",
     name: SPEED.NORMAL,
+    duration: 2.5,
   },
   {
     id: "4",
     name: SPEED.FAST,
+    duration: 2,
   },
 ];
 
